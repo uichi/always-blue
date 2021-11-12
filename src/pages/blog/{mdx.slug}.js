@@ -10,7 +10,7 @@ const BlogBody = styled.div`
     letter-spacing: 0.1em;
     line-height: 1.2em;
     padding: 0;
-    margin: 0;
+    margin: 12px 0;
   }
 `
 
