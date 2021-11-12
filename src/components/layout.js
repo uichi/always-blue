@@ -1,21 +1,34 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
+import styled, { createGlobalStyle } from 'styled-components'
+import Header from './header'
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #e6ffff;
+    margin: 0;
+    padding: 0;
+`;
+
+const Main = styled.main`
+  width: 700px;
+  margin: 0 auto 0;
+`
+const Heading1 = styled.h1`
+  font-size: 40px;
+  padding: 0;
+  margin: 0 0 50px 0;
+`
 
 const Layout = ({ pageTitle, children }) => {
   return (
-    <div>
-      <title>{pageTitle}</title>
-      <nav>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-        </ul>
-      </nav>
-      <main>
-        <h1>{pageTitle}</h1>
+    <>
+      <GlobalStyle />
+      <Header pageTitle={pageTitle} />
+      <Main>
+        <Heading1>{pageTitle}</Heading1>
         {children}
-      </main>
-    </div>
+      </Main>
+    </>
   )
 }
 
