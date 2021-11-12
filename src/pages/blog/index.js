@@ -11,19 +11,35 @@ const BlogArticle = styled.article`
     color: #333;
     text-decoration: none;
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `
 const BlogUl = styled.ul`
 padding: 0;
 margin: 0;
 `
-const BlogHeading2 = styled.h2`
-  font-size: 32px;
-  padding: 0;
-  margin: 0;
-`
 const BlogTime = styled.time`
   font-size: 12.5px;
   letter-spacing: 0.1em;
+`
+const BlogHeading2 = styled.h2`
+  font-size: 32px;
+  padding: 0 0 10px 0;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+`
+const BlogP = styled.p`
+  font-size: 16px;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `
 // const BlogBody = styled.div`
 //   & p {
@@ -45,6 +61,7 @@ const BlogPage = ({ data }) => {
               <BlogTime datetime={node.frontmatter.date}>{node.frontmatter.date}</BlogTime>
               <Link to={`/blog/${node.slug}`}>
                 <BlogHeading2>{node.frontmatter.title}</BlogHeading2>
+                <BlogP>{node.frontmatter.description}</BlogP>
               </Link>
               {/* <BlogBody>
                 <MDXRenderer>
@@ -64,8 +81,9 @@ export const query = graphql`
     allMdx(sort: {fields: frontmatter___date, order: DESC}) {
       nodes {
         frontmatter {
-          date(formatString: "YYYY年MM月DD日")
+          date(formatString: "YYYY/MM/DD HH:mm")
           title
+          description
         }
         id
         slug
