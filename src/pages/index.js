@@ -4,14 +4,12 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout';
 
 const HomeImage = styled.div`
-  position: absolute;
+  // position: absolute;
   filter: opacity(80%);
-  top: 0;
-  left: 0;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  width: 80%;
+  // top: 50%;
+  // left: 50%;
+  // transform: translateY(-50%) translateX(-50%);
+  width: 100%;
   z-index: -1;
 
   @media (max-width: 768px) {
