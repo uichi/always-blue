@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
 const Main = styled.main`
   width: 700px;
   margin: 0 auto 0;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `
 const Heading1 = styled.h1`
   font-size: 40px;

@@ -13,6 +13,11 @@ const SiteHeader = styled.header`
   display: flex;
   justify-content: space-between;
   margin: 10px 20px 40px;
+
+  @media (max-width: 768px) {
+    display: block;
+    justify-content: none;
+  }
 `
 const SiteTitle = styled.div`
   font-family: ten-mincho,serif;
@@ -35,12 +40,20 @@ const Headerli = styled.li`
   font-size: 20px;
   margin: 5px;
 
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+
   & a {
     border-radius: 3px;
     color: white;
     display: block;
     text-decoration: none;
     padding: 8px 15px;
+
+    @media (max-width: 768px) {
+      padding: 6px 13px;
+    }
   }
 `
 
