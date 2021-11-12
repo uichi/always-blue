@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     siteUrl: "https://always-blue.tech",
-    title: "always-blue",
+    title: "いつだって広い海",
   },
   plugins: [
     "gatsby-plugin-styled-components",
@@ -14,5 +14,7 @@ module.exports = {
       }
     },
     "gatsby-plugin-mdx",
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
   ],
 };
