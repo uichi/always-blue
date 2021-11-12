@@ -37,7 +37,7 @@ const BlogTime = styled.time`
 
 const BlogPage = ({ data }) => {
   return (
-    <Layout pageTitle="Blog">
+    <Layout pageTitle="Home">
       <BlogUl>
         {
           data.allMdx.nodes.map((node) => (
