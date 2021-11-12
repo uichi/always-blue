@@ -13,6 +13,10 @@ const HomeImage = styled.div`
   transform: translateY(-50%) translateX(-50%);
   width: 80%;
   z-index: -1;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `
 
 const IndexPage = ({ data }) => {

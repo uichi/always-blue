@@ -13,11 +13,21 @@ const BlogBody = styled.div`
     margin: 12px 0;
   }
 `
+const BlogTime = styled.time`
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+`
+const Heading1 = styled.h1`
+  font-size: 40px;
+  padding: 0;
+  margin: 0 0 30px 0;
+`
 
 const BlogPost = ({ data }) => {
   return (
     <Layout>
-      <h1>{data.mdx.frontmatter.title}</h1>
+      <BlogTime datetime={data.mdx.frontmatter.date}>{data.mdx.frontmatter.date}</BlogTime>
+      <Heading1>{data.mdx.frontmatter.title}</Heading1>
       <BlogBody>
         <MDXRenderer>
           {data.mdx.body}
@@ -32,7 +42,7 @@ export const query = graphql`
     mdx(id: {eq: $id}) {
       frontmatter {
         title
-        date(formatString: "MMMM D, YYYY")
+        date(formatString: "YYYY年MM月DD日")
       }
       body
     }
