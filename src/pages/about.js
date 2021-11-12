@@ -6,9 +6,9 @@ const AboutBody = styled.div`
   & p {
     font-size: 16px;
     letter-spacing: 0.1em;
-    line-height: 1.2em;
+    line-height: 1.4em;
     padding: 0;
-    margin: 12px 0;
+    margin: 13px 0;
   }
 `
 
@@ -18,7 +18,7 @@ const AboutPage = () => {
       <AboutBody>
         <p>ようこそ、いつだって広い海へ</p>
         <h2>uichi</h2>
-        <p>どうも、本ブログを運営しているフルスタックエンジニアのuichiです。</p>
+        <p>どうも、本サイトを運営しているフルスタックエンジニアのuichiです。</p>
         <p>Web制作会社で3年ほど勤め、2020年10月にフリーランスに転身。</p>
         <p>2021年11月から再び自社開発系の会社で正社員に戻りました。</p>
         <p>フロントもバックエンドも経験し、デザインもやっていたりとフルフルスタックです。</p>

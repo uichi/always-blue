@@ -4,23 +4,28 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import styled from 'styled-components'
 
+const BlogTime = styled.time`
+font-size: 12.5px;
+letter-spacing: 0.1em;
+`
+const Heading1 = styled.h1`
+font-size: 40px;
+padding: 0;
+margin: 0 0 30px 0;
+
+@media (max-width: 768px) {
+  font-size: 24px;
+  margin: 0 0 20px 0;
+}
+`
 const BlogBody = styled.div`
   & p {
     font-size: 16px;
     letter-spacing: 0.1em;
-    line-height: 1.2em;
+    line-height: 1.4em;
     padding: 0;
-    margin: 12px 0;
+    margin: 13px 0;
   }
-`
-const BlogTime = styled.time`
-  font-size: 12.5px;
-  letter-spacing: 0.1em;
-`
-const Heading1 = styled.h1`
-  font-size: 40px;
-  padding: 0;
-  margin: 0 0 30px 0;
 `
 
 const BlogPost = ({ data }) => {
