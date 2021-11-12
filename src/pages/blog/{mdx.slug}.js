@@ -2,7 +2,13 @@ import * as React from 'react'
 import Layout from '../../components/layout'
 import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from "@mdx-js/react"
 import styled from 'styled-components'
+import CodeBlock from '../../components/codeBlock'
+
+const components = {
+  pre: CodeBlock
+}
 
 const BlogTime = styled.time`
 font-size: 12.5px;
@@ -34,9 +40,9 @@ const BlogPost = ({ data }) => {
       <BlogTime datetime={data.mdx.frontmatter.date}>{data.mdx.frontmatter.date}</BlogTime>
       <Heading1>{data.mdx.frontmatter.title}</Heading1>
       <BlogBody>
-        <MDXRenderer>
-          {data.mdx.body}
-        </MDXRenderer>
+        <MDXProvider components={components}>
+        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      </MDXProvider>
       </BlogBody>
     </Layout>
   )
