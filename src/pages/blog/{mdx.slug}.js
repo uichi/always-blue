@@ -52,8 +52,8 @@ export const query = graphql`
   query ($id: String) {
     mdx(id: {eq: $id}) {
       frontmatter {
+        date(formatString: "YYYY/MM/DD/ HH:mm")
         title
-        date(formatString: "YYYY年MM月DD日")
       }
       body
     }
