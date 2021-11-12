@@ -17,6 +17,8 @@ const SiteHeader = styled.header`
   @media (max-width: 768px) {
     display: block;
     justify-content: none;
+    margin: 0 auto 0;
+    width: 95%;
   }
 `
 const SiteTitle = styled.div`
@@ -38,7 +40,7 @@ const Headerli = styled.li`
   background-color: #333;
   border-radius: 3px;
   font-size: 20px;
-  margin: 5px;
+  margin-right: 10px;
 
   @media (max-width: 768px) {
     font-size: 16px;
