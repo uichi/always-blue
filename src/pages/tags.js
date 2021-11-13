@@ -37,7 +37,7 @@ const TagsPage = ({
     allMdx: { group }
   },
 }) => (
-  <Layout pageTitle={"Tags"} pageDescription="いつだって広い海のタグリストです">
+  <Layout title={"Tags"} description="いつだって広い海のタグリストです">
     <TagsUl>
       {group.map(tag => (
         <Tagli key={tag.fieldValue}>

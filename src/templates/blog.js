@@ -49,7 +49,7 @@ const BlogP = styled.p`
 
 const Blog = ({ data }) => {
   return (
-    <Layout pageTitle={"Blog"}>
+    <Layout title={"Blog"}>
       {data.allMdx.edges.map(({ node }) => (
         <BlogArticle key={node.id}>
         <BlogTime datetime={node.frontmatter.date}>{node.frontmatter.date}</BlogTime>
@@ -74,15 +74,15 @@ export default Blog
 export const query = graphql`
   query ($limit: Int!, $skip: Int!) {
     allMdx(
-      sort: { order: DESC, fields: [frontmatter___date] },
       limit: $limit,
-      skip: $skip
+      skip: $skip,
+      sort: {order: DESC, fields: frontmatter___date}
     ) {
       edges {
         node {
           frontmatter {
-            date(formatString: "YYYY/MM/DD HH:mm")
             title
+            date(formatString: "YYYY/MM/DD HH:mm")
             description
           }
           id

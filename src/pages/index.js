@@ -10,9 +10,9 @@ const HomeImage = styled.div`
   z-index: -1;
 `
 
-const IndexPage = ({ data }) => {
+const IndexPage = () => {
   return (
-    <Layout>
+    <Layout title="ホーム">
       <HomeImage>
         <StaticImage
           alt="いつだって広い海"

@@ -48,7 +48,7 @@ const BlogBody = styled.div`
 
 const BlogPost = ({ data }) => {
   return (
-    <Layout pageTitle={data.mdx.frontmatter.title} pageDescription={data.mdx.frontmatter.description}>
+    <Layout title={data.mdx.frontmatter.title} description={data.mdx.frontmatter.description}>
       <BlogTime datetime={data.mdx.frontmatter.date}>{data.mdx.frontmatter.date}</BlogTime>
       <TagsUl>
         {data.mdx.frontmatter.tags.map(tag => (

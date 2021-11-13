@@ -1,7 +1,8 @@
 import * as React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import Header from './header'
-import Footer from './footer';
+import Footer from './footer'
+import SEO from './seo'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -29,13 +30,14 @@ const Heading1 = styled.h1`
   }
 `
 
-const Layout = ({ pageTitle, pageDescription, children }) => {
+const Layout = ({ title, description, children }) => {
   return (
     <>
       <GlobalStyle />
-      <Header pageTitle={pageTitle} pageDescription={pageDescription} />
+      <SEO title={title} description={description} />
+      <Header />
       <Main>
-        <Heading1>{pageTitle}</Heading1>
+        <Heading1>{title}</Heading1>
         {children}
       </Main>
       <Footer />
