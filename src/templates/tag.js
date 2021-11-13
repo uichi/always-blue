@@ -90,7 +90,7 @@ const Tag = ({ pageContext, data }) => {
   )
 }
 
-Tags.propTypes = {
+Tag.propTypes = {
   pageContext: PropTypes.shape({
     tag: PropTypes.string.isRequired,
   }),
