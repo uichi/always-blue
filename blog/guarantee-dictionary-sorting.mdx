@@ -1,0 +1,47 @@
+---
+title: 辞書に追加されてるkeyの並び順を保つ
+date: 2018-04-08 00:00
+description: ''
+tags: []
+---
+Python3の辞書はそのままだとkeyの順序が記憶されません。
+そのため、順序を固定したい場合は標準ライブラリのcollections.OrderedDictを使う必要があります。
+
+## 固定しなかった場合
+
+```
+fruits = {}
+fruits["mango"] = 500
+fruits["strawberry"] = 250
+fruits["grape"] = 300
+fruits["orange"] = 100
+fruits["plum"] = 150
+print(fruits)
+```
+
+### 結果
+
+```
+{'strawberry': 250, 'mango': 500, 'plum': 150, 'orange': 100, 'grape': 300}
+```
+
+## 固定した場合
+
+```
+from collections import OrderedDict
+fruits = OrderedDict()
+fruits["mango"] = 500
+fruits["strawberry"] = 250
+fruits["grape"] = 300
+fruits["orange"] = 100
+fruits["plum"] = 150
+print(fruits)
+```
+
+### 結果
+
+```
+OrderedDict([('mango', 500), ('strawberry', 250), ('grape', 300), ('orange', 100), ('plum', 150)])
+```
+
+出力された時の表記は異なりますが、fruits.keys()やfruits.values()などは問題なく実行できます。
