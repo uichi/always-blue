@@ -17,6 +17,7 @@ const SiteHeader = styled.header`
 const SiteTitle = styled.div`
   font-family: ten-mincho,serif;
   font-size: 40px;
+  text-shadow: 1px 2px 3px rgb(0 0 0 / 40%);
 
   & a {
     color: #333;
