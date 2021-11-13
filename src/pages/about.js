@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Layout from '../components/layout'
 import styled from 'styled-components'
+import { StaticImage } from 'gatsby-plugin-image'
 
 const AboutBody = styled.div`
   & p {
@@ -13,8 +14,14 @@ const AboutBody = styled.div`
 `
 
 const AboutPage = () => {
+
   return (
     <Layout title="About" description="いつだって広い海のAboutページです">
+      <StaticImage
+        alt="いつだって広い海"
+        src="../images/profile.jpg"
+        style={{ width: "100%", height: "50vh", objectPosition: "50% bottom" }}
+      />
       <AboutBody>
         <p>ようこそ、いつだって広い海へ</p>
         <h2>uichi</h2>
