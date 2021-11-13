@@ -66,7 +66,7 @@ const Tag = ({ pageContext, data }) => {
   const tagHeader = `${tag} (${totalCount})`
 
   return (
-    <Layout pageTitle={tagHeader}>
+    <Layout pageTitle={tagHeader} pageDescription={`いつだって広い海の${tag}タグが付く記事リストです`}>
       {edges.map(({ node }) => {
         return (
           <BlogArticle key={node.id}>

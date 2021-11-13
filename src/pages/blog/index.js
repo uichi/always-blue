@@ -50,7 +50,7 @@ const BlogP = styled.p`
 
 const BlogPage = ({ data }) => {
   return (
-    <Layout pageTitle="Blog">
+    <Layout pageTitle="Blog" pageDescription="いつだって広い海の技術ブログです">
       {
         data.allMdx.nodes.map((node) => (
           <BlogArticle key={node.id}>

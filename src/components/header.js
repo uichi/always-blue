@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 const SiteHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  margin: 10px 20px 40px;
+  margin: 10px 20px 60px;
 
   @media (max-width: 768px) {
     display: block;
@@ -64,14 +64,26 @@ const Headerli = styled.li`
   }
 `
 
-const Header = ({ pageTitle }) => {
+const Header = ({ pageTitle, pageDescription }) => {
+  let title = ""
+  let description = ""
+  if (pageTitle) {
+    title = `${pageTitle} | いつだって広い海`
+  } else {
+    title = "いつだって広い海"
+  }
+  if (pageDescription) {
+    description = pageDescription
+  } else {
+    description = "いつだって広い海は、プログラマのuichiが運営しています"
+  }
   return (
     <>
       <GlobalStyle />
       <Helmet>
         <html lang="ja" />
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageTitle} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
         <script type="application/javascript" defer>
           {`{(function(d) {
             var config = {

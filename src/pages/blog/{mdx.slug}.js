@@ -15,22 +15,12 @@ const BlogTime = styled.time`
 font-size: 12.5px;
 letter-spacing: 0.1em;
 `
-const Heading1 = styled.h1`
-font-size: 40px;
-padding: 0;
-margin: 0 0 10px 0;
-
-@media (max-width: 768px) {
-  font-size: 24px;
-  margin: 0 0 20px 0;
-}
-`
 const TagsUl = styled.ul`
   border-radius: 3px;
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 0 0 10px 0;
+  padding: 10px 0 10px;
 `
 const TagLi = styled.li`
   font-size: 16px;
@@ -58,9 +48,8 @@ const BlogBody = styled.div`
 
 const BlogPost = ({ data }) => {
   return (
-    <Layout>
+    <Layout pageTitle={data.mdx.frontmatter.title} pageDescription={data.mdx.frontmatter.description}>
       <BlogTime datetime={data.mdx.frontmatter.date}>{data.mdx.frontmatter.date}</BlogTime>
-      <Heading1>{data.mdx.frontmatter.title}</Heading1>
       <TagsUl>
         {data.mdx.frontmatter.tags.map(tag => (
           <TagLi>
@@ -85,6 +74,7 @@ export const query = graphql`
       frontmatter {
         date(formatString: "YYYY/MM/DD/ HH:mm")
         title
+        description
         tags
       }
       body
