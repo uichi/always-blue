@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 
 const SiteFooter = styled.footer`
   font-size: 13px;

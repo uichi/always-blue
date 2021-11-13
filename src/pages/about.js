@@ -14,7 +14,7 @@ const AboutBody = styled.div`
 
 const AboutPage = () => {
   return (
-    <Layout pageTitle="About" pageDescription="いつだって広い海のAboutページです">
+    <Layout title="About" description="いつだって広い海のAboutページです">
       <AboutBody>
         <p>ようこそ、いつだって広い海へ</p>
         <h2>uichi</h2>
