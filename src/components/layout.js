@@ -21,18 +21,19 @@ const Main = styled.main`
 const Heading1 = styled.h1`
   font-size: 40px;
   padding: 0;
-  margin: 0 0 50px 0;
+  margin: 0 0 20px 0;
 
   @media (max-width: 768px) {
-    margin-bottom: 30px;
+    font-size: 30px;
+    margin-bottom: 10px;
   }
 `
 
-const Layout = ({ pageTitle, children }) => {
+const Layout = ({ pageTitle, pageDescription, children }) => {
   return (
     <>
       <GlobalStyle />
-      <Header pageTitle={pageTitle} />
+      <Header pageTitle={pageTitle} pageDescription={pageDescription} />
       <Main>
         <Heading1>{pageTitle}</Heading1>
         {children}
