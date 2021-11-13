@@ -26,7 +26,7 @@ const IndexPage = () => {
     <>
       <GlobalStyle />
       <Header />
-      <Seo title="ホーム" />
+      <Seo title="Home" />
       <StaticImage
         alt="いつだって広い海"
         src="../images/always-blue.jpg"
