@@ -3,6 +3,7 @@ import Layout from '../../components/layout'
 import { graphql, Link } from 'gatsby'
 // import { MDXRenderer } from 'gatsby-plugin-mdx'
 import styled from 'styled-components'
+import { Pagination } from '../../components/pagination'
 
 const BlogArticle = styled.article`
   margin-bottom: 40px;
@@ -15,10 +16,6 @@ const BlogArticle = styled.article`
   @media (max-width: 768px) {
     margin-bottom: 20px;
   }
-`
-const BlogUl = styled.ul`
-padding: 0;
-margin: 0;
 `
 const BlogTime = styled.time`
   font-size: 12.5px;
@@ -54,31 +51,35 @@ const BlogP = styled.p`
 const BlogPage = ({ data }) => {
   return (
     <Layout pageTitle="Blog">
-      <BlogUl>
-        {
-          data.allMdx.nodes.map((node) => (
-            <BlogArticle key={node.id}>
-              <BlogTime datetime={node.frontmatter.date}>{node.frontmatter.date}</BlogTime>
-              <Link to={`/blog/${node.slug}`}>
-                <BlogHeading2>{node.frontmatter.title}</BlogHeading2>
-                <BlogP>{node.frontmatter.description}</BlogP>
-              </Link>
-              {/* <BlogBody>
-                <MDXRenderer>
-                  {node.body}
-                </MDXRenderer>
-              </BlogBody> */}
-            </BlogArticle>
-          ))
-        }
-      </BlogUl>
+      {
+        data.allMdx.nodes.map((node) => (
+          <BlogArticle key={node.id}>
+            <BlogTime datetime={node.frontmatter.date}>{node.frontmatter.date}</BlogTime>
+            <Link to={`/blog/${node.slug}`}>
+              <BlogHeading2>{node.frontmatter.title}</BlogHeading2>
+              <BlogP>{node.frontmatter.description}</BlogP>
+            </Link>
+            {/* <BlogBody>
+              <MDXRenderer>
+                {node.body}
+              </MDXRenderer>
+            </BlogBody> */}
+          </BlogArticle>
+        ))
+      }
+      <Pagination totalCount={data.allMdx.totalCount} />
     </Layout>
   )
 }
 
 export const query = graphql`
   query {
-    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
+    allMdx(
+      limit: 3,
+      skip: 0,
+      sort: {fields: frontmatter___date, order: DESC},
+    ) {
+      totalCount
       nodes {
         frontmatter {
           date(formatString: "YYYY/MM/DD HH:mm")
