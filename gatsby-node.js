@@ -41,6 +41,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   })
 
+  // TODO: 環境変数にする
   const PerPage = 20
   const pageCount = Math.ceil(result.data.postsMdx.totalCount / PerPage)
 

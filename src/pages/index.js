@@ -4,6 +4,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Layout from '../components/layout';
 
 const HomeImage = styled.div`
+  box-shadow: 0 5px 10px 0 rgba(0 ,0, 0, .2);
   filter: opacity(80%);
   width: 100%;
   z-index: -1;
