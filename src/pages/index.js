@@ -30,6 +30,7 @@ const IndexPage = () => {
       <StaticImage
         alt="いつだって広い海"
         src="../images/always-blue.jpg"
+        quality="80"
         style={{
           boxShadow: "0 5px 10px 0 rgba(0 ,0, 0, .2)",
           filter: "opacity(80%)",
