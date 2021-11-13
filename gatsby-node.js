@@ -3,8 +3,8 @@ const _ = require("lodash")
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
-  const tagTemplate = path.resolve("src/templates/tags.js")
-  const blogPageTemplate = path.resolve("src/templates/blog-page.js")
+  const tagTemplate = path.resolve("src/templates/tag.js")
+  const blogTemplate = path.resolve("src/templates/blog.js")
 
   const result = await graphql(`
     {
@@ -48,7 +48,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   for (let i = 0; i < pageCount; i++) {
     createPage({
       path: `/blog/${i + 1}`,
-      component: blogPageTemplate,
+      component: blogTemplate,
       context: {
         limit: PerPage,
         skip: i * PerPage,

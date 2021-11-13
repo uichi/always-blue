@@ -60,7 +60,7 @@ const AllTagsButton = styled.div`
   }
 `
 
-const Tags = ({ pageContext, data }) => {
+const Tag = ({ pageContext, data }) => {
   const { tag } = pageContext
   const { edges, totalCount } = data.allMdx
   const tagHeader = `${tag} (${totalCount})`
@@ -113,7 +113,7 @@ Tags.propTypes = {
   }),
 }
 
-export default Tags
+export default Tag
 
 export const query = graphql`
   query($tag: String) {
