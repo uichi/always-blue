@@ -89,6 +89,7 @@ const Header = ({ pageTitle }) => {
           <HeaderUl>
             <Headerli><Link to="/">Home</Link></Headerli>
             <Headerli><Link to="/blog">Blog</Link></Headerli>
+            <Headerli><Link to="/tags">Tags</Link></Headerli>
             <Headerli><Link to="/about">About</Link></Headerli>
           </HeaderUl>
         </nav>
