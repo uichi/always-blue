@@ -10,7 +10,7 @@ export const Pagination = ({ totalCount }) => {
     <ul>
       {range(1, Math.ceil(totalCount / PER_PAGE)).map((number, index) => (
         <li key={index}>
-          <Link to={`/blogs/${number}`}>{number}</Link>
+          <Link to={`/blog/${number}`}>{number}</Link>
         </li>
       ))}
     </ul>
