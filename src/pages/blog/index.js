@@ -75,7 +75,7 @@ const BlogPage = ({ data }) => {
 export const query = graphql`
   query {
     allMdx(
-      limit: 3,
+      limit: 20,
       skip: 0,
       sort: {fields: frontmatter___date, order: DESC},
     ) {
