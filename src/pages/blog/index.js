@@ -72,6 +72,7 @@ const BlogPage = ({ data }) => {
   )
 }
 
+// TODO: limitの値を環境変数にする
 export const query = graphql`
   query {
     allMdx(
