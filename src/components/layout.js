@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import Header from './header'
 import Footer from './footer'
-import SEO from './seo'
+import Seo from './seo'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -34,7 +34,7 @@ const Layout = ({ title, description, children }) => {
   return (
     <>
       <GlobalStyle />
-      <SEO title={title} description={description} />
+      <Seo title={title} description={description} />
       <Header />
       <Main>
         <Heading1>{title}</Heading1>

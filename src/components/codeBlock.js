@@ -3,7 +3,7 @@ import Highlight, {defaultProps} from 'prism-react-renderer'
 import theme from "prism-react-renderer/themes/vsDark";
 // import Prism from "prism-react-renderer/prism";
 
-export default (props) => {
+const CodeBlock = (props) => {
     const className = props.children.props.className || ''
     const matches = className.match(/language-(?<lang>.*)/)
   return (
@@ -27,3 +27,5 @@ export default (props) => {
     </Highlight>
   )
 }
+
+export default CodeBlock;
