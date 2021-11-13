@@ -47,7 +47,7 @@ const BlogP = styled.p`
 //   }
 // `
 
-const BlogPage = ({ data }) => {
+const Blog = ({ data }) => {
   return (
     <Layout pageTitle={"Blog"}>
       {data.allMdx.edges.map(({ node }) => (
@@ -69,7 +69,7 @@ const BlogPage = ({ data }) => {
   )
 }
 
-export default BlogPage
+export default Blog
 
 export const query = graphql`
   query ($limit: Int!, $skip: Int!) {
