@@ -68,8 +68,8 @@ const BlogBody = styled.div`
 
 const BlogPost = ({ data }) => {
 
-  let image = null
-  if (data.mdx.frontmatter.hero_image) image = getImage(data.mdx.frontmatter.hero_image)
+  const image = getImage(data.mdx.frontmatter.hero_image)
+  console.log(data.mdx.frontmatter.hero_image)
   const heroImageCreditText = data.mdx.frontmatter.hero_image_credit_text
   const heroImageCreditLink = data.mdx.frontmatter.hero_image_credit_link
   let src = null
@@ -141,7 +141,11 @@ export const query = graphql`
         hero_image_alt
         hero_image_credit_link
         hero_image_credit_text
-        hero_image
+        hero_image {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
       }
       body
     }
