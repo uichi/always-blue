@@ -18,9 +18,10 @@ const AboutPage = () => {
   return (
     <Layout title="About" description="いつだって広い海のAboutページです">
       <StaticImage
-        alt="いつだって広い海"
-        src="../images/profile.jpg"
-        style={{ width: "100%", height: "50vh", objectPosition: "50% bottom" }}
+        alt="プロフィール画像"
+        src="../../static/images/profile.jpg"
+        objectPosition="50% 70%"
+        style={{ width: "100%", height: "50vh"}}
       />
       <AboutBody>
         <p>ようこそ、いつだって広い海へ</p>
