@@ -1,0 +1,43 @@
+---
+title: ターミナルでスピードテストする
+date: 2018-04-29 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+Pythonにはスピードテストをコマンド1つでできるパッケージが存在します。
+今回はPython3で実行しましたが、2系でも実行可能です。
+
+インストールはpipで行います。
+
+```
+pip install speedtest-cli
+```
+
+そして実行
+
+```
+speedtest
+```
+
+快適な速さです。
+
+```
+Retrieving speedtest.net configuration...
+Testing from ARTERIA Networks Corporation (xxx.xxx.xxx.xxx)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by xxxx xxxxxx (xxxxx) [2.57 km]: 5.019 ms
+Testing download speed................................................................................
+Download: 103.44 Mbit/s
+Testing upload speed......................................................................................................
+Upload: 106.19 Mbit/s
+```
+
+## 参考
+https://github.com/sivel/speedtest-cli

@@ -1,0 +1,52 @@
+---
+title: 記事の一部を抜粋して一覧ページに表示させたい
+date: 2020-03-28T16:02:13.891Z
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+Djangoでは、テンプレート側で処理を行いたい場合テンプレートフィルタかテンプレートタグのどちらかで補うことができます。
+
+## 使い分け
+この2つは、関数の引数が2つ以下、もしくはロジック内にテンプレートコンテクストを使うかで使い分けできます。
+具体的には、引数が2つのときはテンプレートフィルタを用い、Viewから渡されるContextを使って処理したい場合はテンプレートタグを使います。
+
+今回は関数が2つで複雑なロジックも必要としないのでテンプレートフィルタを使います。
+
+## 使用方法
+アプリケーションに`templatetags`ディレクトリを作成し、その中に`__init__.py`ファイルを作成します。
+
+さらに実際にロジックを入れるためのファイルを作成してください。
+
+```py:excerpt_text_tags.py
+from django import template
+from django.utils import html
+
+register = template.Library()
+
+@register.filter
+def multiply(text):
+    return html.strip_tags(text)[:70] + '...'
+```
+`from django.utils import html`はDjangoが用意しているユーティリティモジュールです。
+
+あとはテンプレート側で呼び出すだけです。
+
+```
+{% load excerpt_text_tags.py %}
+
+...
+
+{{ excerpt | text }}
+
+...
+
+```
+
+## 参考
+[組み込みタグとフィルタ](https://docs.djangoproject.com/ja/2.2/ref/templates/builtins/)

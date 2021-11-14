@@ -1,0 +1,29 @@
+---
+title: DataFrameをdatetime型に変換したい
+date: 2018-07-29 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+データベースからデータを取得し、pandasを使って日時だけをデータフレームにした際に2018-07-23T23:59:59.000000000となっていて扱いづらくなっていました。
+
+これを2018-07-23 23:59:59のような%Y-%m-%d %H:%M:%S形式へ変換するには、pandasにすでに備わっている型変換機能を使います。
+
+```
+df_created_at = pd.DataFrame(created_at)
+pd.to_datetime(df_created_at.values())
+```
+
+これでdatetime型に変換できました。
+
+ちなみに時間を取り除いて、日付だけにしたい場合は
+
+pd.to_datetime(df_created_at.values()).strftime('%Y-%m-%d')
+
+とするだけで可能です。
+

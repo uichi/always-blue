@@ -1,0 +1,17 @@
+---
+title: django開発で、git pushしたときにInternal Serer Errorが出てしまった
+date: 2018-11-11 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+書くほどのことでもないですが、また同じことをやってあわてないための備忘録として記載します。
+
+git pushして画面を更新してみると、Internal Server Errorという文字が出ていました。
+原因はpip install後にpip freeze > requirements.txtをしていないためです。
+

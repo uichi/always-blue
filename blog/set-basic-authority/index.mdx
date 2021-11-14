@@ -1,0 +1,38 @@
+---
+title: Basic認証を設定する
+date: 2018-04-13 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+Documentrootディレクトリと同じ階層に、.htaccessと.htpasswdを設置します。すでにある場合は設定を追記してください。パーミッションは604が推奨です。
+.htpasswdはIDとパスワードを記述するためのパスワードです。パスワードは暗号化されたものが必要です。
+
+>暗号化ができるサイト
+http://www.nishishi.com/scripts/htpasswd/
+http://www.luft.co.jp/cgi/htpasswd.php
+
+.htpasswdへの記述は"ID:password"の形式になります。
+
+.htaccessにはこれを記述します。
+
+```
+AuthUserFile /フルパス/.htpasswd
+AuthGroupFile /dev/null
+AuthName タイトル
+AuthType Basic
+require valid-user
+```
+
+みたいなやつは不要なのでご注意を
+
+AuthUserFileは.htpasswdまでのパス。
+AuthGroupFileはグループごとのアクセス許可のことで、/dev/nullだとグループごとのアクセス制限はしないという意味です。
+AuthNameはポップアップに出てくるタイトル。ダブルクォートで囲ってください。
+AuthTypeは認証形式です。
+require valid-userでIDとパスワードさあえ合ってれば誰でもアクセスすることができます。

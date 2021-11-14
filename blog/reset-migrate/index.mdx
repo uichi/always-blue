@@ -1,0 +1,28 @@
+---
+title: 直前のmigrateを取り消してもう一度migrateし直したい
+date: 2018-09-25 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+一度間違ったマイグレートファイルをマイグレートしてしまった場合は、
+
+```
+python manage.py migrate --fake appName zero
+```
+
+とすることで取り消しすることができます。appNameのとこだけ各自のアプリケーション名に変更してください。
+
+取り消し後はマイグレートファイルを修正して再度マイグレートしてください。
+
+ちなみに間違った方のマイグレートでデータベースにテーブルが追加された場合は、DB接続クライアントツールなどでそのテーブルを削除してください。
+
+
+
+## 参考
+https://ykonishi.tokyo/recommended-db-connect-client/

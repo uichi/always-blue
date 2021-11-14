@@ -1,0 +1,68 @@
+---
+title: 2分でできるDjango環境構築
+date: 2018-04-12 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+タイトルは2分ですが、慣れれば1分でできます。(Pythonすごい!)
+
+## 前提条件
+Python3をインストール済み
+
+## 環境構築
+
+```
+mkdir project_name
+cd project_name
+```
+
+### python仮想環境の構築と起動
+
+```
+python -m venv env
+source env/bin/activate
+```
+
+停止するときはdeactivateです。
+
+ちなみにPoweshellでの起動コマンドは
+
+```
+env/Scripts/activate
+```
+
+となります。
+
+ここでDjangoをインストール
+
+```
+pip install django
+```
+
+### プロジェクト作成
+
+```
+django-admin startproject project .
+```
+
+### 起動!
+
+```
+python manage.py runserver
+```
+
+起動後はhttp://127.0.0.1:8000もしくはhttp://localhost:8000でアクセスできます。
+
+8000ポートがすでに使われているようなら、
+
+```
+python manage.py runserver 8080
+```
+
+のようにポート番号を変えて起動してみてください。
