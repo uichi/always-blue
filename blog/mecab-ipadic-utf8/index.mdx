@@ -1,0 +1,54 @@
+---
+title: mecab-ipadic-utf8 のインストール中にエラーが表示される
+date: 2018-05-05 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+ラズベリーパイにMeCabを入れてNEologdを入れようとするとどうもうまくいかず、いろいろしているうちにMeCabが機能しなくなってしましました。
+
+そこでいったんMeCabを再インストールするも、今度はインストールすらできずこんなエラー文が...
+
+```
+dpkg: パッケージ mecab-ipadic-utf8 の処理中にエラーが発生しました (--configure)
+```
+
+エラーを確認してみると、mecab-ipadicとmecab-utilsを再インストールするよう指示されました。
+
+```
+sudo dpkg --audit
+以下のパッケージは最初の設定中に問題が発生したため、設定が終了していません。
+dpkg --configure <パッケージ> か dselect で設定 (configure) メニューオプショ
+ンを使って設定作業を再試行しなければなりません:
+mecab-ipadic-utf8 IPA dictionary encoded in UTF-8 compiled for Mecab
+
+以下のパッケージは、データベース中に list 制御ファイルが見つかりません。
+再インストールする必要があります:
+mecab-ipadic IPA dictionary compiled for Mecab
+mecab-utils Support programs of Mecab
+
+以下のパッケージは、データベース中に md5sums 制御ファイルが見つかりません。
+再インストールする必要があります:
+mecab-ipadic IPA dictionary compiled for Mecab
+mecab-utils Support programs of Mecab
+
+```
+
+再インストールしてもう一度[bash]sudo dpkg --audit[/bash]
+
+先ほど出ていたエラーがなくなっている模様
+
+試しにmecab-ipadic-utf8を再インストールしてみると今度はうまくインストールされました。
+
+```
+sudo apt install --reinstall mecab-ipadic-utf8
+```
+
+## 参考
+http://ikkuntech.blogspot.jp/2012/03/apt-get.html
+http://engetu21.hatenablog.com/entry/2014/12/06/004525

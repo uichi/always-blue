@@ -12,14 +12,24 @@ const components = {
   pre: CodeBlock
 }
 
+const BlogCategoriesUl = styled.div`
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+const BlogCategoryLi = styled.span`
+  letter-spacing: 0.1em;
+  margin-right: 5px;
+`
 const BlogTime = styled.time`
-font-size: 12.5px;
-letter-spacing: 0.1em;
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
 `
 const ImageCredit = styled.p`
-font-size: 12.5px;
-letter-spacing: 0.1em;
-margin: 5px 0;
+  font-size: 12.5px;
+  margin: 5px 0;
 `
 const TagsUl = styled.ul`
   border-radius: 3px;
@@ -58,7 +68,8 @@ const BlogBody = styled.div`
 
 const BlogPost = ({ data }) => {
 
-  const image = getImage(data.mdx.frontmatter.hero_image)
+  let image = null
+  if (data.mdx.frontmatter.hero_image) image = getImage(data.mdx.frontmatter.hero_image)
   const heroImageCreditText = data.mdx.frontmatter.hero_image_credit_text
   const heroImageCreditLink = data.mdx.frontmatter.hero_image_credit_link
   let src = null
@@ -66,7 +77,14 @@ const BlogPost = ({ data }) => {
 
   return (
     <Layout title={data.mdx.frontmatter.title} description={data.mdx.frontmatter.description} image={src}>
-      <BlogTime datetime={data.mdx.frontmatter.date}>Created : {data.mdx.frontmatter.date}</BlogTime>
+      <BlogCategoriesUl>
+        Category{" : "}
+        {(data.mdx.frontmatter.categories || []).map(category => (
+          <BlogCategoryLi class="post-category">{category}</BlogCategoryLi>
+        ))}
+      </BlogCategoriesUl>
+      <BlogTime datetime={data.mdx.frontmatter.date} itemprop="datepublished">Created{" : "}{data.mdx.frontmatter.date}</BlogTime>
+      <time datetime={data.mdx.frontmatter.updated_date || ""} itemprop="modified"></time>
       <GatsbyImage
         image={image}
         alt={data.mdx.frontmatter.hero_image_alt}
@@ -93,7 +111,7 @@ const BlogPost = ({ data }) => {
         })()}
       </ImageCredit>
       <TagsUl>
-        {data.mdx.frontmatter.tags.map(tag => (
+        {(data.mdx.frontmatter.tags || []).map(tag => (
           <TagLi key={tag}>
             <Link to={`/tags/${kebabCase(tag)}/`}>
               {tag}
@@ -115,17 +133,15 @@ export const query = graphql`
     mdx(id: {eq: $id}) {
       frontmatter {
         date(formatString: "YYYY/MM/DD HH:mm")
+        updated_date(formatString: "YYYY/MM/DD HH:mm")
         title
         description
+        categories
         tags
         hero_image_alt
         hero_image_credit_link
         hero_image_credit_text
-        hero_image {
-          childImageSharp {
-            gatsbyImageData
-          }
-        }
+        hero_image
       }
       body
     }

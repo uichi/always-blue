@@ -1,0 +1,85 @@
+---
+title: 汎用ビューを使ってHello World!をやってみる
+date: 2018-09-18 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+初心者の登竜門、Hello World!をDjangoでやります。
+
+Django環境の起動などについてはここを参照してください
+https://ykonishi.tokyo/quick-django/
+
+なにはともあれプロジェクトの作成
+
+```
+python startproject project .
+```
+
+まずはproject/settings.pyにアプリケーションを含めます。今回作るアプリケーション名はhelloなので以下のように記述します。
+```
+
+...
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'hello.apps.HelloConfig',
+]
+
+...
+
+```
+
+次にパスを追加します。
+project/urls.pyに新たなURLを宣言します。
+
+```
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('', include('hello.urls')),
+    path('admin/', admin.site.urls),
+]
+```
+
+今度はpython startapp helloを実行しアプリケーションを作成してください。
+作成されたアプリケーションにURLconfを追加するために、urls.pyを新たに作成して以下のコードを入力してください。
+
+```[python title="urls.py"]```
+from django.urls import path
+from . import views
+
+app_name = 'hello'
+
+urlpatterns = [
+    path('', views.Top.as_view(), name='hello'),
+]
+```
+
+views.pyではタイトルにあるとおり汎用ビューを使います。
+
+```
+from django.views import generic
+
+class Top(generic.TemplateView):
+template_name = 'hello/hello.html'
+```
+
+hello/templates/hello/にhello.htmlを作成してHello World!を記述しましょう。
+
+```
+<p>Hello World!</p>
+```
+
+python manage.py runserverを実行し、localhost:8000へアクセスするとHello World!が表示されるはずです。
