@@ -6,6 +6,7 @@ import { MDXProvider } from "@mdx-js/react"
 import styled from 'styled-components'
 import CodeBlock from '../../components/codeBlock'
 import kebabCase from "lodash/kebabCase"
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const components = {
   pre: CodeBlock
@@ -14,6 +15,11 @@ const components = {
 const BlogTime = styled.time`
 font-size: 12.5px;
 letter-spacing: 0.1em;
+`
+const ImageCredit = styled.p`
+font-size: 12.5px;
+letter-spacing: 0.1em;
+margin: 5px 0;
 `
 const TagsUl = styled.ul`
   border-radius: 3px;
@@ -47,9 +53,39 @@ const BlogBody = styled.div`
 `
 
 const BlogPost = ({ data }) => {
+
+  const image = getImage(data.mdx.frontmatter.hero_image)
+  const heroImageCreditText = data.mdx.frontmatter.hero_image_credit_text
+  const heroImageCreditLink = data.mdx.frontmatter.hero_image_credit_link
+
   return (
     <Layout title={data.mdx.frontmatter.title} description={data.mdx.frontmatter.description}>
-      <BlogTime datetime={data.mdx.frontmatter.date}>{data.mdx.frontmatter.date}</BlogTime>
+      <BlogTime datetime={data.mdx.frontmatter.date}>Created : {data.mdx.frontmatter.date}</BlogTime>
+      <GatsbyImage
+        image={image}
+        alt={data.mdx.frontmatter.hero_image_alt}
+      />
+      <ImageCredit>
+        {(() => {
+          if (!heroImageCreditText) return false;
+          if (heroImageCreditLink) {
+            return (
+              <>
+                Photo Credit:{" "}
+                <a href={heroImageCreditLink}>
+                  {heroImageCreditText}
+                </a>
+              </>
+          )} else {
+            return (
+              <>
+                Photo Credit:{" "}
+                {heroImageCreditText}
+              </>
+            )
+          }
+        })()}
+      </ImageCredit>
       <TagsUl>
         {data.mdx.frontmatter.tags.map(tag => (
           <TagLi>
@@ -76,6 +112,15 @@ export const query = graphql`
         title
         description
         tags
+        hero_image_alt
+        hero_image_credit_link
+        hero_image_credit_text
+        hero_image {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+
       }
       body
     }
