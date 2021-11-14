@@ -1,0 +1,38 @@
+---
+title: CPUの温度やファンの回転数をチェックしたい
+date: 2018-04-29 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+LinuxにはLinux Hardware Monitoringプロジェクトというものがあり、ハードに搭載されているセンサからCPUの温度、ファンの回転数、電圧などをセンサから読み取ることができます。
+
+## インストール
+
+```
+sudo apt-get install lm-sensors
+```
+
+## センサの検出
+
+```
+sudo sensors-detect
+
+```
+
+## 実行
+
+```
+sensors
+```
+
+## 参考
+https://yoshinorin.net/2017/11/17/logging-linux-hardware-info/
+https://www.xmisao.com/2015/11/23/debian-lm-sensors.html
+https://help.ubuntu.com/community/SensorInstallHowto
+https://wiki.archlinux.org/index.php/lm_sensors

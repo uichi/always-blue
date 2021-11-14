@@ -1,0 +1,43 @@
+---
+date: 2018-04-01 00:00
+title: C言語で配列の要素数を出力する方法
+description: 'C言語で配列の要素数を出力する方法'
+categories: ["C言語"]
+updated_date: "2021-11-14 22:00"
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+
+C言語で配列の要素数を知りたい場合、要素数を出力する関数がないため、配列の要素全体の大きさと配列要素1つ分の大きさを求めて要素数を導く必要があります。
+
+```c
+#include<stdio.h>
+
+int main(void)
+{
+  char *list[] = {"Ubuntu", "CentOS", "Arch", "fedora"};
+  printf("Entire list size is %d bytes.\n", (int) sizeof list);
+  printf("First element size is %d bytes.\n", (int) sizeof list[0]);
+  // 配列の要素全体の大きさ / 配列の要素一つ分の大きさ
+  int list_size = sizeof list / sizeof list[0];
+  printf("Entire elements are %d.\n", list_size);
+  return 0;
+}
+```
+
+6,7行目でsizeofの前に(int)を付けているのは、コンパイル時に
+
+warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘long unsigned int’ [-Wformat=]
+
+という警告が出るためです。そのため、%dを%zu(size_t型)にするか、intでキャストするなどの処置が必要です。
+
+## 出力結果
+Entire list size is 32 bytes.
+First element size is 8 bytes.
+Entire elements are 4.
+
+配列全体のサイズは32バイトで、それぞれの要素は8バイトとなっているため、要素数は4と分かります。
+

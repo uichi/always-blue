@@ -1,0 +1,34 @@
+---
+title: デフォルトで設定されているもの以外のデータベースを使いたい
+date: 2018-06-03 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+database.phpの中に、$defaultで設定しているデータベースと同じような形式で、使いたいデータベースを設定する。
+
+```
+class DATABASE_CONFIG {
+  public $legacy = array(
+    'datasource' => 'Database/Mysql',
+    'persistent' => false,
+    'host' => 'localhost',
+    'login' => 'cakephpuser',
+    'password' => 'c4k3roxx!',
+    'database' => 'my_cakephp_legacy_project',
+    'prefix' => ''
+  );
+}
+```
+
+こんな設定をしたとすると、あとはモデルで呼び出してやるだけです。
+
+呼び出し方は、
+
+## 参考
+https://book.cakephp.org/2.0/ja/development/configuration.html#database-configuration

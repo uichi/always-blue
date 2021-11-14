@@ -1,0 +1,45 @@
+---
+title: Python3.6への切り替え
+date: 2018-04-14 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+Ubuntu 16.04 LTSには標準でPython3.5とPython2.7が入っています。そのため、Python3.6を使いたい場合は別にインストールしなければなりません。
+
+## Python3.6をインストール
+Jonathan Fさんのプライベートリポジトリからインストールします。
+pipはhttps://bootstrap.pypa.io/から
+
+```
+$ sudo add-apt-repository ppa:jonathonf/python-3.6
+$ sudo apt-get update
+$ sudo apt-get install python3.6 python3.6-dev
+$ wget https://bootstrap.pypa.io/get-pip.py
+$ sudo python3.6 get-pip.py
+```
+
+これでインストール完了です。
+
+## デフォルトをPython3.6にしたい
+
+このままだとPythonのデフォルトバージョンは2.7のままなので、デフォルトをPython3.6に切り替えます。
+Python2.7をデフォルトのままにしたい場合はスキップしてよいです。
+
+設定はシンボリックリンクを使います。
+
+> シンボリックリンクとは
+http://wa3.i-3-i.info/word1151.html
+https://qiita.com/go_astrayer/items/ab993cdc420d4f7f50d4
+
+```
+mkdir -p $HOME/bin
+ln -s /usr/bin/python3.6 $HOME/bin/python
+```
+
+`Python --version`を打つと`Python3.6.*`が表示されてデフォルトバージョンが切り替わったことが分かります。

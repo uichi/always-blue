@@ -1,0 +1,111 @@
+---
+title: PHP7.0、Mysql、NginxでWordPress環境構築
+date: 2018-04-28 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## PHP7.0をインストール
+
+```
+sudo apt-get -y install php7.0 php7.0-common php7.0-gd php7.0-fpm php7.0-mysql php7.0-mbstring
+```
+
+## Nginxをインストール
+
+```
+sudo apt install nginx
+```
+
+## MySQLをインストール
+
+```
+sudo apt install mysql-server
+sudo mysql_secure_installation
+```
+
+## WordPressをインストール
+
+```
+wget -O - 'https://ja.wordpress.org/wordpress-4.6.1-ja.tar.gz' | tar zxvf -
+```
+
+インストールしたWordPressフォルダは、var/www/hrml配下に移動させてください。
+
+```
+chown -R www-data:www-data /var/www/html/wordpress/
+chmod -R 755 /var/www/html/wordpress/
+```
+
+## Nginxの設定
+/etc/nginx/sites-available/defaultに以下の設定を追記します。
+
+```
+index index.html index.htm index.php index.nginx-debian.html;
+
+location ~ .php$ {
+  fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+  fastcgi_index index.php;
+  include fastcgi_params;
+}
+```
+
+文法が正しいか確認します。
+
+```
+sudo nginx -t
+```
+
+このコマンドで、下記のような表示がされれば適切に設定ができていることになります。
+
+```
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+
+Nginxを再起動します。
+
+```
+sudo service nginx start
+```
+
+## MySQLにデータベース、ユーザー、ホストを追加
+
+```
+mysql -u root -p
+create database wordpress;
+create user wordpress_user@localhost identified by 'wordpress_password';
+grant all privileges on wordpress.* to wordpress_user@localhost;
+flush privileges;
+```
+
+データベース名やユーザー名は自由ですので、適宜都合の良い名前で設定しても良いです。
+MySQLを再起動します。
+
+```
+sudo service mysql start
+```
+
+## wp-config.phpに作成したデータベース、ホスト、ユーザーを追加します。
+
+```
+/** WordPress のためのデータベース名 */
+define('DB_NAME', 'wordpress');
+
+/** MySQL データベースのユーザー名 */
+define('DB_USER', 'wordpress_user');
+
+/** MySQL データベースのパスワード */
+define('DB_PASSWORD', 'wordpress_password');
+
+/** MySQL のホスト名 */
+define('DB_HOST', 'localhost');
+```
+
+これで、http://localhost/wordpressにアクセスしてみるとWordPressの初期設定画面が表示されるはずです。

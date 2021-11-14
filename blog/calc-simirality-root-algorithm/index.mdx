@@ -1,0 +1,73 @@
+---
+title: 平方根の近似計算アルゴリズム
+date: 2018-07-18 00:00
+updated_date: "2021-11-14 22:00"
+description: ""
+categories:
+tags:
+hero_image: ""
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## 目的
+平方根の計算を計算効率の観点からアルゴリズムを構成していくことを目的とします。今回使用するPython言語にはsqrt()というある値の平方根を求めるメソッドが存在するのですが、アルゴリズムという視点でプログラムを考えるためにあえて回りくどい方法を使って「平方根の近似値」を求めます。
+
+## 方法
+アルゴリズムはPython3を使って構築します。
+
+### 総当たりで平方根の近似を求める
+まずは力技で近似値を求めます。ざっくり説明すると、0に順次小さな値を足していき平方根に限りなく近づいたらその近似値を出力する方法です。
+
+```
+x = 25
+epsilon = 0.01
+step = epsilon**2
+ans = 0.0
+while abs(ans**2 - x) >= epsilon and ans*ans <= x:
+    ans += step
+if abs(ans**2 - x) >= epsilon:
+  print('平方根が見つかりませんでした')
+else:
+  print(x, 'の平方根の近似値は', ans, 'です')
+```
+
+実行すると、`25 の平方根の近似値は 4.999 です`と出力されます。
+
+### 二分法によって平方根の近似を求める
+二分法では0からxの値の中間値から平方根の探索を行う。そうすることで前述した総当たりによるアルゴリズムを大幅に改善することができます。
+
+```
+x = 25
+epsilon = 0.01
+low = 0.0
+high = max(1.0, x)
+ans = (high - low)/2.0
+while abs(ans**2 - x) >= epsilon:
+    if ans**2 < x:
+      low = ans
+    else:
+      high = ans
+    ans = (high + low)/2.0
+print(x, 'の平方根の近似値は', ans, 'です')
+```
+
+実行すると、`25 の平方根の近似値は 5.00030517578 です`と出力されます。
+
+### ニュートンーラフソン法による平方根の近似を求める
+ニュートン-ラフソン法は、二分法よりも処理効率の高いアルゴリズムを実現できます。
+
+```
+epsilon = 0.01
+x = 25
+guess = x/2.0
+while abs(guess*guess - x) >= epsilon:
+guess = guess - (((guess**2) - x)/(2*guess))
+print(x, 'の平方根の近似値は', guess, 'です')
+```
+
+実行すると、`25 の平方根の近似値は 5.00001295305 です`と出力されます。
+
+## 参考
+http://www.etcnotes.info/almath/mathnewton.html
+http://www.yamamo10.jp/yamamoto/lecture/2006/5E/nonlinear_equation/nonlinear_eq_html/node5.html

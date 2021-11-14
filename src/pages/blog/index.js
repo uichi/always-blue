@@ -17,6 +17,11 @@ const BlogArticle = styled.article`
     margin-bottom: 20px;
   }
 `
+const BlogCategory = styled.span`
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  margin-right: 5px;
+`
 const BlogTime = styled.time`
   font-size: 12.5px;
   letter-spacing: 0.1em;
@@ -28,6 +33,7 @@ const BlogHeading2 = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 24px;
+    padding: 0 0 5px 0;
   }
 `
 const BlogP = styled.p`
@@ -54,7 +60,14 @@ const BlogPage = ({ data }) => {
       {
         data.allMdx.nodes.map((node) => (
           <BlogArticle key={node.id}>
-            <BlogTime datetime={node.frontmatter.date}>{node.frontmatter.date}</BlogTime>
+            {(node.frontmatter.categories || []).map(category => (
+              <BlogCategory class="post-category">{category}</BlogCategory>
+            ))}
+            <BlogTime datetime={node.frontmatter.date} itemprop="datepublished">
+              {!node.frontmatter.categories || "| "}
+              {node.frontmatter.date}
+            </BlogTime>
+            <time datetime={node.frontmatter.updated_date || ""} itemprop="modified"></time>
             <Link to={`/blog/${node.slug}`}>
               <BlogHeading2>{node.frontmatter.title}</BlogHeading2>
               <BlogP>{node.frontmatter.description}</BlogP>
@@ -84,8 +97,10 @@ export const query = graphql`
       nodes {
         frontmatter {
           date(formatString: "YYYY/MM/DD HH:mm")
+          updated_date(formatString: "YYYY/MM/DD HH:mm")
           title
           description
+          categories
         }
         id
         slug
