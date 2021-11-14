@@ -16,7 +16,7 @@ const AboutBody = styled.div`
 const AboutPage = () => {
 
   return (
-    <Layout title="About" description="いつだって広い海のAboutページです">
+    <Layout title="About" description="いつだって広い海のAboutページです" image="images/profile.jpg">
       <StaticImage
         alt="プロフィール画像"
         src="../../static/images/profile.jpg"

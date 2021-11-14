@@ -30,11 +30,11 @@ const Heading1 = styled.h1`
   }
 `
 
-const Layout = ({ title, description, children }) => {
+const Layout = ({ title, description, image, children }) => {
   return (
     <>
       <GlobalStyle />
-      <Seo title={title} description={description} />
+      <Seo title={title} description={description} image={image} />
       <Header />
       <Main>
         <Heading1>{title}</Heading1>
