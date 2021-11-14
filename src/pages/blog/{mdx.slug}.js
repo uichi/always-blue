@@ -114,7 +114,7 @@ export const query = graphql`
   query ($id: String) {
     mdx(id: {eq: $id}) {
       frontmatter {
-        date(formatString: "YYYY/MM/DD/ HH:mm")
+        date(formatString: "YYYY/MM/DD HH:mm")
         title
         description
         tags
