@@ -50,6 +50,10 @@ const BlogBody = styled.div`
     padding: 0;
     margin: 13px 0;
   }
+
+  & img {
+    width: 100%;
+  }
 `
 
 const BlogPost = ({ data }) => {
@@ -97,8 +101,8 @@ const BlogPost = ({ data }) => {
       </TagsUl>
       <BlogBody>
         <MDXProvider components={components}>
-        <MDXRenderer>{data.mdx.body}</MDXRenderer>
-      </MDXProvider>
+          <MDXRenderer>{data.mdx.body}</MDXRenderer>
+        </MDXProvider>
       </BlogBody>
     </Layout>
   )
@@ -120,7 +124,6 @@ export const query = graphql`
             gatsbyImageData
           }
         }
-
       }
       body
     }
