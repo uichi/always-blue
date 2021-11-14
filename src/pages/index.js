@@ -29,7 +29,7 @@ const IndexPage = () => {
       <Seo title="Home" />
       <StaticImage
         alt="いつだって広い海"
-        src="../images/always-blue.jpg"
+        src="../../static/images/always-blue.jpg"
         quality="80"
         style={{
           boxShadow: "0 5px 10px 0 rgba(0 ,0, 0, .2)",
