@@ -61,9 +61,11 @@ const BlogPost = ({ data }) => {
   const image = getImage(data.mdx.frontmatter.hero_image)
   const heroImageCreditText = data.mdx.frontmatter.hero_image_credit_text
   const heroImageCreditLink = data.mdx.frontmatter.hero_image_credit_link
+  let src = null
+  if (image) src = image.images.fallback.src.slice(1)
 
   return (
-    <Layout title={data.mdx.frontmatter.title} description={data.mdx.frontmatter.description}>
+    <Layout title={data.mdx.frontmatter.title} description={data.mdx.frontmatter.description} image={src}>
       <BlogTime datetime={data.mdx.frontmatter.date}>Created : {data.mdx.frontmatter.date}</BlogTime>
       <GatsbyImage
         image={image}
@@ -92,7 +94,7 @@ const BlogPost = ({ data }) => {
       </ImageCredit>
       <TagsUl>
         {data.mdx.frontmatter.tags.map(tag => (
-          <TagLi>
+          <TagLi key={tag}>
             <Link to={`/tags/${kebabCase(tag)}/`}>
               {tag}
             </Link>

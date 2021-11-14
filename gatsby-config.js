@@ -4,7 +4,7 @@ module.exports = {
     title: "いつだって広い海",
     titleTemplate: "%s · いつだって広い海",
     description: "いつだって広い海は、プログラマのuichiが運営しています",
-    image: "/images/always-blue.jpg",
+    image: "images/always-blue.jpg",
     twitterUsername: "@uichiyy",
 
   },
