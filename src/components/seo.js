@@ -54,6 +54,7 @@ const Seo = ({ title, description, image, article }) => {
       )}
 
       {seo.image && <meta name="twitter:image" content={seo.image} />}
+      <meta name="google-site-verification" content="3L6OsdCRTMDMcHt5wMEuG0NWgEpR9C4oOfMZ9WZaQCY" />
     </Helmet>
   )
 }
