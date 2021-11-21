@@ -70,8 +70,8 @@ const BlogPost = ({ data }) => {
 
   const image = getImage(data.mdx.frontmatter.hero_image)
   console.log(data.mdx.frontmatter.hero_image)
-  const heroImageCreditText = data.mdx.frontmatter.hero_image_credit_text
-  const heroImageCreditLink = data.mdx.frontmatter.hero_image_credit_link
+  const heroImageCreditText = data.mdx.frontmatter.hero_image_credit_text || null
+  const heroImageCreditLink = data.mdx.frontmatter.hero_image_credit_link || null
   let src = null
   if (image) src = image.images.fallback.src.slice(1)
 
@@ -87,7 +87,7 @@ const BlogPost = ({ data }) => {
       <time datetime={data.mdx.frontmatter.updated_date || ""} itemprop="modified"></time>
       <GatsbyImage
         image={image}
-        alt={data.mdx.frontmatter.hero_image_alt}
+        alt={data.mdx.frontmatter.hero_image_alt || "画像"}
       />
       <ImageCredit>
         {(() => {
