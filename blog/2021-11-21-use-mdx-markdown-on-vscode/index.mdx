@@ -1,0 +1,35 @@
+---
+date: "2021-11-21 20:00"
+updated_date: "2021-11-21 20:00"
+title: "Visual Studio Codeでmdxファイルに色をつけたい"
+description: "VSCodeのプラグイン、Markdown All in Oneを使ってmdxファイル内のMarkdownに色を付けます"
+categories: ["VSCode"]
+tags: ["Markdown"]
+---
+
+# MDXとは
+JSXにMarkdownを組み込んだものがMDXです。JSXはJavaScriptの拡張構文です。
+
+# VSCodeでもmdxファイルに色を付ける
+GatsbyJSを使っているときに、mdxのファイルにも色を付けたいと思ったので`Markdown All in One`というプラグインを拡張することにしました。
+
+GatsbyJSで使っているmdxファイルの中身は、普通のMarkdownなのでMarkdown All in Oneを拡張さえすれば表示できます。
+
+## Markdown All in Oneを拡張
+Markdown All in Oneをインストールしていない方は、VSCodeのExtensions Marketから入れましょう。
+
+Markdown All in Oneの設定画面を開き、Extension Settingsを開いてください。
+
+![cannot-use-export-default-and-declare-variables](/images/cannot-use-export-default-and-declare-variables.png)
+
+次に`Edit in Settings.json`を開いてください。
+
+![cannot-use-export-default-and-declare-variables2](/images/cannot-use-export-default-and-declare-variables2.png)
+
+こちらのjsonを追記すると、mdxファイルのテキストに色が付きます。
+
+```json
+"files.associations": {
+    "*.mdx": "markdown"
+}
+```
