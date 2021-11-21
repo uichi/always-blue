@@ -64,6 +64,28 @@ const BlogBody = styled.div`
   & img {
     width: 100%;
   }
+
+  & blockquote {
+    border-left: 2.5px solid #808080;
+    color: #666;
+    padding-left: 10px;
+    margin: 0;
+  }
+
+  code {
+    background-color: rgb(40, 40, 40);
+    border-radius: 2px;
+    color: rgb(212, 212, 212);
+    padding: 2px 2px 2px 5px;
+  }
+
+  .prism-code {
+    font-size: 14px;
+  }
+
+  .token-line {
+    padding: 3px 0;
+  }
 `
 
 const BlogPost = ({ data }) => {
