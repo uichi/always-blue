@@ -1,11 +1,44 @@
 ---
-date: "2021-11-23 19:00"
-updated_date: "2021-11-23 19:00"
+date: "2021-11-23 19:10"
+updated_date: "2021-11-23 19:10"
 title: "久しぶりにReact環境をyarn startするとエラーになる"
 description: "ローカル環境で久しぶりにReactアプリを起動するとエラーが表示されたので修正しました"
 categories: ["React"]
-tags: [""]
+tags: ["エラー"]
 ---
+
+こちらがエラーの冒頭
 
 >TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
 
+react-scriptsのバージョンが古くなると表示されるようなので、アップグレードしました。
+
+# アップデート方法
+
+react-scriptの最新バージョンをこちらのコマンドで確認してください。
+
+```
+npm info react-scripts version
+```
+
+`package.json`を修正します。
+
+```js
+"dependencies": {
+    ...
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.4.3", // change with above version
+    ...
+}
+```
+
+node_modulesを一度削除して、再度installします。
+
+```
+rm -rf node_modules
+yarn install
+yarn start
+```
+
+以上でエラーが改善されます。
