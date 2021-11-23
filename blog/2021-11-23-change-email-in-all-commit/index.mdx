@@ -1,0 +1,22 @@
+---
+date: "2021-11-23 10:10"
+updated_date: "2021-11-23 10:10"
+title: "コミット履歴にある自分のメールアドレスを一括で変更したい"
+description: "git filter-branchを使ってコミット履歴にある自分のメールアドレスを一括変更します"
+categories: ["Git"]
+tags: ["filter-branch"]
+---
+
+# filter-branchとは
+filter-branchはコミットの書き換えを機械的に行ってくれるオプションです。
+大量のコミット履歴にある自分のメールアドレス変更や特定のファイルを削除することもできます。
+
+# メールアドレスを一括変更してみる
+
+実際のコマンドはこちらです。
+
+```
+git filter-branch -f --env-filter "GIT_AUTHOR_NAME=[your name]; GIT_AUTHOR_EMAIL=[your email]; GIT_COMMITTER_EMAIL=[your email];" HEAD
+```
+
+`[]`を置き換えて使用してください。
