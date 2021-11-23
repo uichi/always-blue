@@ -22,5 +22,27 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    {
+      resolve: `gatsby-plugin-lodash`,
+      options: {
+        disabledFeatures: [
+          "shorthands",
+          "cloning",
+          "currying",
+          "caching",
+          "collections",
+          "exotics",
+          "guards",
+          "metadata",
+          "deburring",
+          "unicode",
+          "chaining",
+          "memoizing",
+          "coercions",
+          "flattening",
+          "placeholders"
+        ],
+      },
+    },
   ],
 };
