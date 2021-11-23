@@ -5,6 +5,9 @@ import Footer from './footer'
 import Seo from './seo'
 
 const GlobalStyle = createGlobalStyle`
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: #e6ffff;
     margin: 0;

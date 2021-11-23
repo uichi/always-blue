@@ -87,6 +87,31 @@ const BlogBody = styled.div`
     padding: 3px 0;
   }
 `
+const ScrollTop = styled.a`
+  position: fixed;
+  right: 5px;
+  bottom: 20px;
+  height: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transform: rotate(90deg);
+  font-size: 90%;
+  line-height: 1.5rem;
+  color: #737373;
+  padding: 0 0 0 35px;
+  border-top: solid 1px;
+
+  &::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 0px;
+  width: 15px;
+  border-top: solid 1px;
+  transform: rotate(35deg);
+  transform-origin: left top;
+`
 
 const BlogPost = ({ data }) => {
 
@@ -146,6 +171,9 @@ const BlogPost = ({ data }) => {
           <MDXRenderer>{data.mdx.body}</MDXRenderer>
         </MDXProvider>
       </BlogBody>
+      <ScrollTop href="#">
+        TOP
+      </ScrollTop>
     </Layout>
   )
 }
