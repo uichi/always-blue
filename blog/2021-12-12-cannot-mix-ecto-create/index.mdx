@@ -1,0 +1,39 @@
+---
+date: "2021-12-12 19:00"
+updated_date: "2021-11-23 21:20"
+title: "mix ectoコマンドでデータベースが作成できない"
+description: "mix ecto.createを実行するとPostgrex.Errorになるときの対処法"
+categories: ["プログラミング言語"]
+tags: ["Phoenix", "Elixir"]
+---
+
+`mix ecto.create`でデータベースを作成しようとするとエラーになってしまいました。
+
+エラーの内容
+
+```
+17:35:59.206 [error] GenServer #PID<0.288.0> terminating
+** (Postgrex.Error) FATAL 28000 (invalid_authorization_specification) role "postgres" does not exist
+    (db_connection 2.4.1) lib/db_connection/connection.ex:100: DBConnection.Connection.connect/2
+    (connection 1.1.0) lib/connection.ex:622: Connection.enter_connect/5
+    (stdlib 3.16.1) proc_lib.erl:226: :proc_lib.init_p_do_apply/3
+Last message: nil
+State: Postgrex.Protocol
+
+17:35:59.220 [error] GenServer #PID<0.295.0> terminating
+** (Postgrex.Error) FATAL 28000 (invalid_authorization_specification) role "postgres" does not exist
+    (db_connection 2.4.1) lib/db_connection/connection.ex:100: DBConnection.Connection.connect/2
+    (connection 1.1.0) lib/connection.ex:622: Connection.enter_connect/5
+    (stdlib 3.16.1) proc_lib.erl:226: :proc_lib.init_p_do_apply/3
+Last message: nil
+State: Postgrex.Protocol
+** (Mix) The database for Hello.Repo couldn't be created: killed
+```
+
+# 原因
+
+エラーの原因は`postgres`ユーザーにデータベースを作成する権限がないためでした。
+
+`psql postgres`を実行してログイン後、`CREATE ROLE postgres LOGIN CREATEDB;`を実行してください。
+
+その後、`mix ecto.create`でデータベースが作成されます。
