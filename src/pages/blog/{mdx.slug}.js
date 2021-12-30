@@ -42,8 +42,11 @@ const TagLi = styled.li`
   font-size: 16px;
   border-radius: 5px;
   background: #e0ffff;
-  box-shadow: inset 7px 7px 14px #c7e3e3,
-              inset -7px -7px 14px #f9ffff;
+  box-shadow:  5px 5px 10px #bed9d9,
+              -5px -5px 10px #ffffff;
+
+
+
   margin: 0 8px 0 0;
   & a {
     color: #333;

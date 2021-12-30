@@ -13,9 +13,9 @@ const PaginationUl = styled.ul`
 const PaginationLi = styled.li`
   font-size: 20px;
   border-radius: 10px;
-background: #e0ffff;
-box-shadow: inset 7px 7px 14px #c7e3e3,
-            inset -7px -7px 14px #f9ffff;
+  background: #e0ffff;
+  box-shadow: 5px 5px 10px #bed9d9,
+              -5px -5px 10px #ffffff;
   margin: 0 8px;
   & a {
     color: #333;
