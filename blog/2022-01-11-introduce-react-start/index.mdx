@@ -1,0 +1,221 @@
+---
+date: "2022-01-12 01:00"
+updated_date: "2022-01-12 01:00"
+title: "React開発ことはじめ"
+description: "React開発を始めるためのナレッジをまとめました"
+categories: ["フロントエンド"]
+tags: ["React"]
+---
+
+React開発を進めるためのナレッジ全般をまとめました。React実装の参考になればと思います。
+
+対象者はチュートリアルを理解できるレベルの方を想定しています。
+
+# Reactの立ち上げ
+
+まっさらの状態でReactを立ち上げる場合は、`Create React App`という雛形を使うことでビルドやESlintなどの機能を含むReact環境を簡単に起動させることができます。立ち上げ時の設定で`TypeScript`やコーディング規約の設定もできます。
+
+[Create React App](https://create-react-app.dev/)
+
+`Create React App`を使わない場合は、webpackなどを使い独自で構築する必要があります。
+
+# ディレクトリ構成
+
+ディレクトリの構成はシステムの規模や開発スタイルによって柔軟にカスタマイズできます。ルートごと、ファイルの種類ごとなど構成は様々です。
+
+こちらの例は、ルートごとにディレクトリを作り、ディレクトリ内で必要なページやスタイル、APIなどの設定を入れています。commonディレクトリにはヘッダーやフッターなど他の画面でも使用するコンポーネントを配置します。
+
+ページ数が多い場合にある程度見やすい構成になります。
+
+```
+common/
+  Header.jsx
+  Footer.jsx
+  Sidebar.jsx
+profile/
+  index.js
+  Profile.css
+  ProfileAPI.js
+blog/
+  index.js
+  blog.js
+  blog.css
+  BlogAPI.js
+```
+
+続いてこちらの例は、ファイルの種類ごとにディレクトリを構成しています。ページ数が少ないサービスなどではすっきりした構成になります。
+
+```
+api/
+  BlogAPI.js
+  ProfileAPI.js
+css/
+  Blog.css
+  Profile.css
+  Header.css
+  Footer.css
+components/
+  Blog.js
+  Profile.js
+  Header.js
+  Footer.js
+
+```
+
+構成は複雑すぎるよりシンプルにしておきましょう。ネストしすぎるとインポートが面倒になります。
+
+開発が進むにつれ現状の構成に不便を感じてきたら、その都度構成を考えていきましょう。
+
+# 命名
+
+Reactも`javascript`なので、基本的にはjavascriptの一般的なスタイルに沿って実装します。
+
+`jsx`ファイルとコンポーネントはアッパーキャメルにしましょう。apiを定義したファイルは、スネークケースでも構いません。
+
+# フラグメント
+
+コンポーネントで複数の要素を返す際に、子要素をまとめる必要のある場合があります。
+
+そういったときは、フラグメントを追加することで解決できます。
+
+## 実装
+
+```jsx
+render() {
+  return (
+    <React.Fragment>
+      <ChildA />
+      <ChildB />
+      <ChildC />
+    </React.Fragment>
+  );
+}
+
+```
+
+`React.Fragment`は省略することができるので、`<></>`としても構いません。むしろ、`<></>`とするのがスタンダードです。
+
+# ルーティング
+
+ルーティングには`react-router-dom`というライブラリを使うのが定番です。
+
+[React Router](https://reactrouter.com/)
+
+最新はバージョン6になっており、バージョン5と書き方が変わっているので気をつけましょう。
+
+# Hooks
+
+今時のReact開発ではHooksでの実装が主流です。以前はクラスコンポーネントというものが一般的だったのですが、React 16.8に搭載されて以降Hooksに置き換わっていき、より直接的で簡潔に実装できるようになりました。
+
+もし現状のサービスにクラスコンポーネントが使用されていたとしても、廃止されたわけではないのでそのままお使いいただけます。
+
+[フックに関するよくある質問](https://ja.reactjs.org/docs/hooks-faq.html)
+
+hooksでは、stateの管理やライフサイクルの管理にはあらかじめ用意されている関数を使います。state管理では`useState`、ライフサイクルには`useEffect`を使用してください。
+
+# useEffectの第２引数
+
+`useEffect`には第２引数を渡すことができ、特定のstateが更新されたタイミングで`useEffect`を実行することができます。
+
+## 使い方
+
+### マウント・アンマウント時
+
+ちなみにマウントはDOMが追加されること、アンマウントはDOMが削除されることを指します。
+
+マウント・アンマウント時に実行したい場合は、第2引数に空配列を渡すと可能です。`return`が`useEffect`の最後にある場合は、アンマウント時に`return`が実行されます。
+
+```
+useEffect(() => {
+  console.log('マウント・アンマウント時に実行')
+}, [])
+```
+
+### 最初のマウント時と特定のstateが更新された時
+
+下記のように第2引数に特定のstateを入れておくことで、そのstateが更新されたタイミングとマウント時に`useEffect`を実行できます。
+
+```
+useEffect(() => {
+  console.log('valueに変化があった時に実行')
+}, [value])
+```
+
+# クリーンアップ
+
+既に画面を遷移しているが、前のページの非同期処理が作用してステートが更新されようとした時にメモリリークの警告が出ます。
+
+↓このようなエラー
+
+>Warning: Can't perform a React state update on an unmounted component. 
+This is a no-op, but it indicates a memory leak in your application. 
+To fix, cancel all subscriptions and asynchronous tasks 
+in a useEffect cleanup function.
+
+
+そのため、ページが遷移した後は遷移した後は遷移前のステートを更新しないようなクリーンアップ処理を入れる必要があります。
+
+実際の実装はこちらを参考にしていただければと思います。
+
+## 実装
+
+```jsx
+const [profile, setProfile] = useState({ name: '', email: '' });
+
+useEffect(() => {
+  let cleanedUp = false;
+  const url = 'https://alwaysblue.gatsbyjs.io/';
+  url.pathname = '/api/v1/profile'
+  fetch(url)
+  .then(res => res.json())
+  .then(res => {
+    if (!cleanedUp) setProfile(res)
+  })
+
+  const cleanup = () => {
+    cleanedUp = true;
+  };
+  return cleanup;
+}, []);
+```
+
+## 解説
+
+`cleanedUp`は最初に`false`しています。そのため、ページ遷移する前に`if (!cleanedUp) setProfile(res)`が実行すると`profile`が更新されます。
+
+しかし、`profile`が更新される前にページが遷移してしまうと、アンマウントした時点で`return cleanup;`が実行され、`cleanedUp = true`となります。ページ遷移時に非同期処理が実行されていた場合は、`if (!cleanedUp)`の条件は通らないので、`profile`を更新せずに済みます。
+
+メモリリークを放置してしまうとページの動作に支障を及ぼす可能性があるので、必ず対策しておきましょう。
+
+# スクロール
+
+ReactはSPAが故に、そのままでは遷移後のページもページ位置が変わりません。つまり、ページを下までスクロールしてから遷移すると、ページは下にいったままとなります。
+
+このようなときは、遷移後に一番上へスクロールさせてやる処理を追加しましょう。
+
+## 実装
+
+```jsx
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
+
+export default scrollToTop;
+```
+
+# 状態管理
+
+HooksにはReduxと同等の機能があるようなので、Reduxをわざわざ導入する必要がない場合もある。
+
+[「Redux よさようなら」最強の React 実装](https://uncle-javascript.com/react-typescript-hooks-best-practice)
+
+詳しくは後日追記します。
+
+# スタイルガイド
+後日記載予定
+
+# CSS
+後日記載予定
+
+# SEO
+後日記載予定
