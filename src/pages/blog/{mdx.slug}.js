@@ -41,9 +41,9 @@ const TagsUl = styled.ul`
 const TagLi = styled.li`
   font-size: 16px;
   border-radius: 5px;
-  background: #e0ffff;
+  background: #dbfcfc;
   box-shadow:  5px 5px 10px #bed9d9,
-              -5px -5px 10px #ffffff;
+              -3px -3px 5px #ffffff;
 
 
 
