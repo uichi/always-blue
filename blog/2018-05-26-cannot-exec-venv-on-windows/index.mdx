@@ -1,0 +1,23 @@
+---
+title: Windowsでvenvが起動ができない
+date: "2018-05-26 00:00"
+updated_date: "2021-11-14 22:00"
+description: "Powershellでvenvが実行する方法"
+categories: ["Windows"]
+tags: ["Python", "venv"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+pythonのvenv起動させようとすると実行できず…
+調べてみると、powershellでは通常状態でスクリプトの実行ができないとのことでした。
+
+特定のポリシーを割り当てることで実行できます。
+
+```
+Set-ExecutionPolicy Unrestricted -Force -Scope CurrentUser
+```
+
+## 参考
+https://technet.microsoft.com/ja-jp/library/ee176961.aspx

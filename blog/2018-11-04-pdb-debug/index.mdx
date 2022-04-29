@@ -1,0 +1,42 @@
+---
+title: Djangoでpdbを使ってデバッグする
+date: "2018-11-04 00:00"
+updated_date: "2021-11-14 22:00"
+description: デバッグツールdjango-pdbを導入する方法
+categories: ["Django"]
+tags: ["django-pdb"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## pdbについて
+DjangoにはDjango Debug Toolbarという非常に素晴らしいデバッグツールがありますが、テンプレートが正常に表示される状況でしか使えないのがやや難点ではあります。
+
+そんなきにおすすめなのがdjango-pdbです。
+
+django-pdbはviewに対してデバッグをすることが可能で、コンソール上でステップ実行ができます。railsでいうところのbinding.pryみたいなものです。
+
+## 使い方
+```
+pip install django-pdb
+```
+
+インストール後、以下の１行を入れた箇所で処理が止まりステップ実行ができます。
+
+```
+import pdb; pdb.set_trace()
+```
+
+## よく使うコマンド
+| コマンド | 説明 |
+| s(tep) | ステップイン |
+| n(ext) | ステップオーバー |
+| r(eturn) | ステップアウト |
+| l(ist) | 現在行の前後のソースコードを表示 |
+| a(rgs) | 現在いる関数の引数を表示 |
+| p | プリント |
+| c(ont(inue)) | 次のブレイクポイントまで実行 |
+
+## 参考
+http://racchai.hatenablog.com/entry/2016/05/30/070000

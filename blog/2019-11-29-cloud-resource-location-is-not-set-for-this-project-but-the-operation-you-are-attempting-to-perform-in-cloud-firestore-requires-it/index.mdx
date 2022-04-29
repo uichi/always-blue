@@ -1,0 +1,26 @@
+---
+title: >-
+  Cloud resource location is not set for this project but the operation you are
+  attempting to perform in Cloud Firestore requires it.
+date: "2019-11-29 16:00"
+updated_date: "2021-11-14 22:00"
+description: firebaseでロケーションのエラーがでるときの対処法
+categories: ["Firebase"]
+tags:
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+`firebase init`を実行して設定を進めていたときに、タイトルのようなエラーが出てきました。
+
+メッセージを読んでみると、ロケーションが設定されていないと記載されています。
+
+なので、Firebaseの管理画面でプロジェクトの設定を開き、ローケーションを設定します。
+ロケーションの設定は少々時間がかかります。
+
+再び`firebase init`をして設定を進めていくと今度はロケーションのエラーが表示されるはずです。
+
+こちらを参考に、設定を進めてみてください。
+
+https://qiita.com/k3ntar0/items/b151034026c8f4a0f447

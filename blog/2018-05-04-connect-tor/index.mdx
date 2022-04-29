@@ -1,0 +1,68 @@
+---
+title: PythonでTorネットワークに接続する
+date: "2018-05-04 00:00"
+updated_date: "2021-11-14 22:00"
+description: Pythonを使ってTorネットワーク接続する方法
+categories: ["Python"]
+tags: ["Tor"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+pythonでTorを使うには主に2通りの方法があります。1つがrequests[socks]を使う方法と、もう1つがPysocksです。
+
+どちらを使うかは個人の自由なのですが、requests[socks]は柔軟性に優れていてかつ直感的に操作できるrequestsライブラリのサードパーティなので、今回はrequests[socks]を使用します。Pysocksは時間のあるときにいずれ試してみようかと思います。
+
+## インストール
+
+Torを使うにあたっていくつかインストールするものがあります。
+
+### Torをインストール
+
+```
+sudo apt install tor
+sudo service tor start
+```
+
+### privoxyをインストール
+
+Torを使うのにプロキシを忘れてはいけません。
+
+```
+sudo apt install privoxy
+sudo service privoxy start
+```
+
+### requests[socks]をインストール
+
+pythonにsocksサードパーティをインストーします。
+
+```
+sudo pip install requests[socks]
+```
+
+ここでいったんTorネットワークへの接続準備ができているか確認してみます。
+localhost:9050もしくは127.0.0.1:9050にブラウザからアクセスしてみると`This is a SOCKs proxy, not an HTTP proxy.`と出てくるはずです。出てこない場合は、Torへの接続準備に少し時間がかかっていることも考えられる(Torなので仕方ない)ので、時間をおいて再度アクセスしてみてください。
+
+pip installしたrequests[socks]はpip freezeなどで確認してください。
+
+>ポートの変更などしたい方はここらへんを参照ください
+http://rehanmanzoor.me/post/sending-anonymous-requests-through-tor-using-python3-on-linux
+http://blog.asial.co.jp/1008
+
+## 実際のアクセス
+ローカルに設けたプロキシを指定し、ip確認サイトへアクセスしてみます。
+
+```
+import requests
+proxies = {'http':'socks5://127.0.0.1:9050'}
+url = 'http://ifconfig.me/ip'
+response = requests.get(url, proxies=proxies)
+print(response.text)
+```
+
+実行してみると自分のグローバルipとアクセスしたサイトが表示するipが異なるはずです。
+
+## 参考
+http://docs.python-requests.org/en/master/user/advanced/#socks

@@ -1,0 +1,42 @@
+---
+title: JSXのreturnの中で分岐処理を処理したい
+date: "2019-10-29 07:39"
+updated_date: "2021-11-14 22:00"
+description: JSXのreturn内で分岐処理をします
+categories: ["React"]
+tags: ["JSX"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## みそ
+`render() {return()}`の中で以下のコードを追加する
+```
+{(() => {jsコード})()}
+```
+
+## 例
+```
+render() {
+  return (
+    {(() => {
+      if (thisWorld) {
+        return (
+          <>
+           <div>Hello World!</div>
+          </>
+        )
+      } else {
+        return (
+          <>
+            <div>Gatsby World!</div>
+          <>
+        )
+      }
+    })()}
+  )
+}
+```
+
+ただし、分岐処理などは別に切り出して関数かするのがベストです。

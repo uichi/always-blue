@@ -1,0 +1,23 @@
+---
+title: Matplotlibでグラフを描画した際にラベルに日本語を表示したい
+date: "2018-08-18 00:00"
+updated_date: "2021-11-14 22:00"
+description: Matplotlibのグラフに日本語を表示する方法
+categories: ["Python"]
+tags: ["Matplotlib"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+jupyter notebookでmatplotlibを使いグラフを描画すると、日本語を標準でサポートしてくれないためラベルやグラフのタイトルに文字化けが起きてしまいます。
+
+そのため、日本語を使えるようにするための設定が必要です。
+
+設定は簡単で、以下を追加するだけです。
+
+```
+import matplotlib
+font = {"family": "TakaoGothic"}
+matplotlib.rc('font', **font)
+```

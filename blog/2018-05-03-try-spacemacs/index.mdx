@@ -1,0 +1,55 @@
+---
+title: Spacemacsを使ってみる
+date: "2018-05-03 00:00"
+updated_date: "2021-11-14 22:00"
+description: Spacemacsに入門してみよう
+categories: ["Spacemacs"]
+tags: ["Emacs"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+今までAtomエディタを使っていたのですが、Atomのモッサリ感を極力避けたかったのでSpacemacsへ乗り換えることにしました。もちろんAtomはパッケージや情報も充実しており、使い勝手も良いので、時に応じて継続して使っていくつもりです。
+
+## インストール
+インストールはhttps://github.com/syl20bnr/spacemacsを参考に進めていってください。
+Emacsエディタをインストールしていない場合は先にインストールしておくことが注意点です。
+
+軽い手順だけ載せておきます。
+
+```
+cd ~
+mv .emacs.d .emacs.d.bak
+mv .emacs .emacs.bak
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+emacs --insecure
+```
+
+## インストール後の設定
+インストール後はいくつかの設定が残っています。
+Spacemacsの起動後に以下のような選択画面が出てくると思います。
+好みによって選択しても構わないのです。ちなみに私はvimを選択しました。
+
+```
+What is your preferred editing style?
+Among the stars aboard the Evil flagship (vim)
+On the planet Emacs in the Holy control tower (emacs)
+```
+
+標準ディストリビューションが推奨です。
+
+```
+What distribution of spacemacs would you like to start with?
+The standard distribution, recommended (spacemacs)
+A minimalist distribution that you can build on (spacemacs-base)
+```
+
+ivyがおすすめとの情報を見つけたので、ivyを選択しました。
+
+```
+What type of completion framework do you want?
+A heavy one but full-featured (helm)
+None (not recommended)
+A lighter one but still very powerful (ivy)
+```

@@ -1,0 +1,35 @@
+---
+title: サービスの自動起動を操作する
+date: "2018-05-05 00:00"
+updated_date: "2021-11-14 22:00"
+description: "systemctlを使ってミドルウェアなどのサービスを自動起動します"
+categories: ["systemctl"]
+tags: ["自動化"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+自動起動を操作できるサービスの確認は、rc5.dディレクトリで確認できます。
+
+```
+ll /etc/rc5.d
+```
+
+自走起動をオンにしたい場合
+
+```
+systemctl enable サービス名.service
+```
+
+自動起動をオフにしたい場合
+
+```
+systemctl disable サービス名.service
+```
+
+サービスが自動起動設定を確認したい場合
+
+```
+systemctl is-enable サービス名.service
+```

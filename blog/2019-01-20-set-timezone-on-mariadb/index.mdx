@@ -1,0 +1,52 @@
+---
+title: LinuxでMariaDBのタイムゾーンを設定する
+date: "2019-01-20 00:00"
+updated_date: "2021-11-14 22:00"
+description: MariaDBにタイムゾーンを設定する方法
+categories: ["MariaDB"]
+tags:
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## 環境設定
+使用するOSはUbuntuで、タイムゾーンはAsia/Tokyoにします。
+
+## タイムデータのインポート
+デフォルトの状態だとタイムゾーンのデータがなく、UTC+0がtime_zoneに設定されています。
+試しに、 `show variables like '%time_zone%';` で確認してみると日本標準時で設定されていないのがわかります。
+
+```
+Variable_name | Value
+system_time_zone | JST
+time_zone | SYSTEM
+```
+
+ということで、タイムゾーンデータをインポートします。
+以下を実行してください。
+
+```
+/usr/bin/mysql_tzinfo_to_sql /usr/share/zoneinfo ~/timezone.sql
+mysql -u root -p -D mysql ~/timezone.sql
+```
+
+```
+Warning: Unable to load /usr/share/zoneinfo/leap-seconds. list
+as time zone. Skipping it.
+```
+
+と表示されるかもしれませんが、無視しても問題はありませんでした。
+
+## Asia/Tokyoを設定
+```
+[mysqld]
+default-time-zone = 'Asia/Tokyo'
+```
+を追記します。
+
+## 再起動
+MariaDBを再起動し、再び show variables like '%time_zone%'; するとtime_zoneのところがAsia/Tokyoになっているはずです。
+
+## 参考
+https://qiita.com/tailak/items/63dce2dd7dfe049b038e

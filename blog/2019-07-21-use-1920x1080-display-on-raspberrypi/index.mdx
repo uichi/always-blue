@@ -1,0 +1,30 @@
+---
+title: 解像度1920x1080のディスプレイをラズベリーパイで使う
+date: "2019-07-21 00:00"
+updated_date: "2021-11-14 22:00"
+description: ラズベリーパイにディスプレイ取り付ける設定
+categories: ["ラズベリーパイ"]
+tags:
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+```
+sudo vim /boot/config.txt
+```
+
+でディスプレイ用の設定を追加できます。
+
+```
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=1920 1080 60 3 0 0 0
+```
+
+これと同じように追記し、再起動させると設定が反映されます。
+
+詳しくは参考を見てください。
+
+## 参考
+https://qiita.com/uichi/items/655cb431cba260315250#%E8%A7%A3%E5%83%8F%E5%BA%A6%E3%81%AE%E8%A8%AD%E5%AE%9A

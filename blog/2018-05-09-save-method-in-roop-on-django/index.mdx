@@ -1,0 +1,32 @@
+---
+title: CakePHPでループ中にsaveメソッドを実行したい
+date: "2018-05-09 00:00"
+updated_date: "2021-11-14 22:00"
+description: CakePHPの実装でループ処理内でデータ保存を実行する
+categories: ["CakePHP"]
+tags: ["PHP"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+forやforeach中にデータベース保存を実行する際、必ずcreateメソッドを実行する必要があります。
+
+もし実行しなかった場合は、初めの保存だけidが割り振られ、その他のデータにはidがない状態となります。
+
+CakePHP2公式ドキュメントにも`ループ中で save を呼び出すときは、 create() を忘れないようにしてください。`と記載されています。
+
+実際にコードはこんな感じになります。
+
+```
+foreach($Dishes as $data){
+    $this->Recipe->create();
+    $this->Recipe->save($data);
+}
+```
+
+create(false)とすると、新規登録であることを明示してデータ保存ができます。
+
+## 参考
+https://book.cakephp.org/2.0/ja/models/saving-your-data.html
+http://www.kaasan.info/archives/2543

@@ -1,0 +1,38 @@
+---
+title: fork爆弾の対策
+date: "2018-05-20 00:00"
+updated_date: "2021-11-14 22:00"
+description: コンピュータをフリーズさせる爆弾コマンド
+categories: ["クラッキング"]
+tags:
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## fork爆弾とは
+簡単に説明すると、コンピュータのプロセスを埋め尽くしてフリーズさせる手法のことです。
+
+以下のコマンドで爆弾を発動させることができます。
+
+```
+:(){: | : &};:
+```
+
+ほんとに動かなくなるのでうかつに実行しないようにしましょう。
+
+## 対策
+ulimitコマンドでリソースの制限をかけることができます。
+
+```
+# ユーザーが一人で利用できるプロセス数を1024個に制限する
+ulimit -u 1024
+
+# CPU時間を最大30秒にする
+ulimit -t 30
+```
+
+## 参考
+https://www.skyarch.net/blog/?p=3638
+https://access.redhat.com/ja/solutions/1402473
+http://tech.nikkeibp.co.jp/it/article/COLUMN/20060227/230911/

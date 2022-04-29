@@ -1,0 +1,50 @@
+---
+title: Djangoで現在の日付を取得したいのにアプリ起動時の日付がずっと表示される
+date: "2019-01-29 00:00"
+updated_date: "2021-11-14 22:00"
+description: アプリ起動時でなく現在の日付を正確に取得する方法
+categories: ["バグ"]
+tags: ["Django"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+## 現象
+date.today()で今日の日付を取得後、画面でその日付を表示するという処理を実装し、実際にDjangoを立ち上げてみるとその日の日付が表示されたのですが、翌日になると前日の日付のままで表示されていました。
+
+## 原因
+先に結論から言ってしまうと、date.today()がロード時に一度しか呼び出されていないことにありました。一度しか呼び出されなかった理由は、date.today()を入れていた変数がグローバル変数であり、なおかつグローバル変数はロード時に1度しか呼び出されないためです。
+
+↓1度しか呼び出されない例
+```
+class ArticleList(ListView):
+
+...........
+
+    today = datetime.today()
+    def get_queryset(self):
+        article_list = Article.objects.filter(created_at=self.today)
+    return article_list
+
+...........
+
+```
+
+## 解決策
+```
+class ArticleList(ListView):
+
+...........
+
+    def get_queryset(self):
+        today = datetime.today()
+        article_list = Article.objects.filter(created_at=today)
+    return article_list
+
+...........
+
+```
+
+## 参考
+https://stackoverflow.com/questions/15064908/django-application-uwsgi-have-wrong-datetime-today-result-shows-started-date

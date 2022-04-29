@@ -1,0 +1,70 @@
+---
+title: MeCabとNEologdで新語に強い形態素解析環境を構築する
+date: "2018-05-04 00:00"
+updated_date: "2021-11-14 22:00"
+description: 流行語に強い形態素解析器を構築しよう
+categories: ["自然言語処理"]
+tags: ["MeCab", "NEologd"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+形態素解析でよく利用されるMecabにNEologdを組み合わせることで、新語や流行語に強い形態素解析環境を作ることができます。
+
+## 環境
+Debian系OS
+
+## MeCabの環境構築
+
+```
+sudo apt install mecab libmecab-dev mecab-ipadic-utf8
+```
+
+### 動作確認
+
+```
+mecab
+```
+
+`param.cpp(69) [ifs] no such file or directory: /usr/local/lib/mecab/dic/ipadic/dicrc`と辞書がないと言われたので、辞書をインストールします。言われなければスキップしてください。
+
+```
+wget -O mecab-ipadic-2.7.0-20070801.tar.gz 'https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7MWVlSDBCSXZMTXM'
+tar zxfv mecab-ipadic-2.7.0-20070801.tar.gz
+cd mecab-ipadic-2.7.0-20070801
+./configure --with-charset=utf8
+sudo make install
+```
+
+これでmecabコマンドが使えるようになります。
+
+## NEologdをインストールする
+NEologdは週2回以上、語彙が追加されるので形態素解析には必須のアイテムです。
+なお、辞書の元になるデータの配布と更新は GitHub 経由で行われます。
+
+```
+git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
+```
+
+cloneするとmecab-ipadic-neologdというディレクトリが存在するはずです。
+
+インストールと更新はmecab-ipadic-neologdディレクトリに移動し、コマンド1つで完了します。
+
+```
+cd mecab-ipadic-neologd
+./bin/install-mecab-ipadic-neologd -n
+```
+
+これで最強の形態素解析環境の出来上がりです。
+早速実行してみましょう。
+
+```
+mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/
+```
+
+なお、NEologdの辞書のパスはecho `mecab-config --dicdir`"/mecab-ipadic-neologd"で確認できます。
+
+## 参考
+https://github.com/neologd/mecab-ipadic-neologd
+http://taku910.github.io/mecab/

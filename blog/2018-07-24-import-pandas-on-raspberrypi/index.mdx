@@ -1,0 +1,32 @@
+---
+title: ラズベリーパイでpandasが使いたいけどimportできない
+date: "2018-07-24 00:00"
+updated_date: "2021-11-14 22:00"
+description: ラズベリーパイにPythonのpandasを入れる
+categories: ["Python"]
+tags: ["pandas", "numpy"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+Raspberry Piでpip install pandasしてpandasを使おうとすると
+
+importerror: missing required dependencies ['numpy']
+
+こんなエラーが出てきました。numpyはすでにインストールしている状態でした。
+
+この問題を解決するには、pip installしたnumpyやpandasをアンインストールして、aptでpython-pandasをインストールする必要があるようです。
+
+```
+pip uninstall numpy
+pip uninstall pandas
+
+pip3 uninstall numpy
+pip3 uninstall pandas
+
+sudo apt install python-pandas
+```
+
+## 参考
+https://qiita.com/Avocado/items/ba800e5afffc2bd98dc6

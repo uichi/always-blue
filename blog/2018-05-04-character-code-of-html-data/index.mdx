@@ -1,0 +1,33 @@
+---
+title: Pythonでrequest.getしたHTMLデータの文字コード対策
+date: "2018-05-04 00:00"
+updated_date: "2021-11-14 22:00"
+description: PythonでスクレイピングしたHTMLデータの文字コードを指定する方法
+categories: ["スクレイピング"]
+tags: ["Python"]
+
+hero_image_alt: ""
+hero_image_credit_text: ""
+hero_image_credit_link: ""
+---
+request.getしたサイトのレスポンスヘッダに文字コード情報がないと、ISO-8859-1と判定されてしまいます。もし、ヘッダに文字コード情報がない場合は、対策が必要です。
+
+## 通常
+
+```
+response = requests.get("http://www.example.com/")
+response.encoding = response.apparent_encoding
+```
+
+## 大量のデータがある場合
+
+cChardetを使うことで高速に処理できるそうです。
+
+```
+import cchardet
+response = requests.get("http://www.example.com/")
+response.encoding = cchardet.detect(response.content)["encoding"]
+```
+
+## 参考
+https://kanji.hatenablog.jp/entry/python-requests-beautifulsoup-encoding
